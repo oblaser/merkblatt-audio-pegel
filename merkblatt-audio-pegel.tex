@@ -1,0 +1,119 @@
+﻿\documentclass[9pt,german]{article}
+\usepackage[ngerman]{babel} % automatische Silbentrennung (deaktivieren: \mbox ; force: \-)
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{nicefrac}
+\usepackage{fontenc}
+
+\usepackage{booktabs} % tabular
+\def\arraystretch{1.2}
+\newcommand{\tabitem}{~~\llap{\textbullet}~~}
+
+\usepackage{graphicx}
+
+\usepackage{geometry}
+\geometry{
+    a4paper,
+    %total={160mm,247mm},
+    left=25mm,
+    top=25mm,
+    right=25mm,
+    bottom=25mm,
+    %showframe,
+}
+
+\usepackage{hyperref}
+\hypersetup{
+    %hidelinks,
+    %allcolors=black,
+    linktoc=all,
+    colorlinks=true,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=blue
+}
+
+\usepackage{biblatex}
+\addbibresource{merkblatt-audio-pegel.bib}
+
+\renewcommand{\familydefault}{\sfdefault}
+\setlength{\parindent}{0pt}
+
+\pagenumbering{gobble}
+
+% Konvertierung zu HTML (zB zur Rechtschreibeprüfung mit Word oÄ):
+% pandoc -s -o myDocument.html myDocument.tex
+% Windows: %LOCALAPPDATA%\Pandoc\pandoc.exe
+
+
+
+\begin{document}
+
+{\Large Merkblatt Audio Pegel}
+
+\section*{Formeln}
+In der Regel wird mit Spannungen gerechnet. Somit werden folgende Formeln für die Umrechnungen zwischen
+Verstärkungsmass $g = L_{Uout} - L_{Uin}$ und Verstärkungsfaktor $V=\frac{U_{out}}{U_{in}}$ verwendet:
+$$ g = 20 * \log_{10}(V) \Leftrightarrow V = 10^{g/20} $$
+
+Ein Pegel $L_U$ ergibt sich aus der Ziel- oder Messgrösse $U$ und dem Referenzwert $U_0$:
+$$ L_U = 20 * \log_{10}(\frac{U}{U_0})  \Leftrightarrow U = U_0 * 10^{L_U/20} $$
+
+
+
+\section*{Physikalische Bezugspegel}
+\begin{tabular}{|l|l|l|}
+    \hline
+    \textbf{Pegeleinheit} & \textbf{Bezugs-/Referenzwert} & \textbf{Bemerkungen} \\
+    \hline
+    0 dBu & U\textsubscript{0} = 0.775V\textsubscript{eff} & 1mW\textsubscript{eff} an 600$\Omega$ \\
+    \hline
+    0 dBV & U\textsubscript{0} = 1V\textsubscript{eff} &  = 2.218dBu \\
+    \hline
+\end{tabular}
+\\
+
+{\small Siehe \cite[Bezugspegel]{adt} und \cite{kirstein}.}
+
+
+
+\section*{Line Pegel}
+\begin{tabular}{|c|c|}
+    \hline
+    \textbf{Tontechnik} & \textbf{Heimgeräte/Consumer} \\
+    \hline
+    \textbf{+4dBu}              & \textbf{-10dBV} \\
+    1.782dBV                    & -7.782dBu \\
+    1.228V\textsubscript{eff}   & 0.3162V\textsubscript{eff} \\
+    1.736V\textsubscript{P}     & 0.4472V\textsubscript{P} \\
+    3.472V\textsubscript{PP}    & 0.8944V\textsubscript{PP} \\
+    \hline
+\end{tabular}
+\\
+
+In der Tontechnik trifft man auch Angaben für den Bezugspegel von 0dBV, das sind 1.78dB weniger als +4dBu.
+Dieser Unterschied spielt meistens keine Rolle, da viele Geräte einen Gain Regler haben, mit dem dieser kaum
+hörbare Unterschied ausgeglichen werden könnte.
+
+Der Pegel -10dBV wird z.T. auch als ``Aux Pegel'' (anstatt Line Pegel) bezeichnet.
+
+{\small Siehe \cite{kirstein} und \cite{shure}.}
+
+
+
+\section*{Kopfhörer Ausgang}
+
+Für Kopfhörer Ausgänge lassen sich schlecht generelle Aussagen treffen. Ein Kopfhörerverstärker ist immer für
+eine gewisse Impedanz (-Bereich) ausgelegt.
+\\
+
+Bei Mobilgeräten scheint der maximal Pegel von 150mV\textsubscript{P} gängig zu sein. Smartphones erreichen
+diesen Wert ggf. bereits bei ca. \nicefrac{2}{3} der Lautstärkeneinstellung, wobei der letzte Drittel oft eine
+Warnung des Benutzers verursacht.
+
+
+
+\printbibliography[title=Quellen]
+
+\end{document}
