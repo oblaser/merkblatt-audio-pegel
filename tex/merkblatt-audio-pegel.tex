@@ -1,9 +1,15 @@
-﻿\documentclass[9pt,german]{article}
+%
+% author        Oliver Blaser
+% copyright     CC BY-SA 4.0
+%
+
+\documentclass[9pt,german]{article}
 \usepackage[ngerman]{babel} % automatische Silbentrennung (deaktivieren: \mbox ; force: \-)
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath}
 \usepackage{nicefrac}
 \usepackage{fontenc}
+\usepackage{ccicons}
 
 \usepackage{booktabs} % tabular
 \def\arraystretch{1.2}
@@ -37,10 +43,36 @@
 \usepackage{biblatex}
 \addbibresource{merkblatt-audio-pegel.bib}
 
+\usepackage{array}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}b{#1}}
+\newcolumntype{T}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}b{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}b{#1}}
+
+
+
+\newcommand{\docVersion}{1.0}
+\newcommand{\docTitle}{Merkblatt Audio Pegel}
+
+
+
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[L]{\footnotesize Oliver Blaser CC BY-SA 4.0 \ccbysa}
+%\fancyfoot[C]{\footnotesize \thepage /\pageref{LastPage}}
+\fancyfoot[R]{\footnotesize \href{https://github.com/oblaser/merkblatt-audio-pegel}{\color{black}github.com/oblaser \docTitle} v\docVersion}
+\renewcommand{\footrulewidth}{0.4pt}
+
+
+
 \renewcommand{\familydefault}{\sfdefault}
 \setlength{\parindent}{0pt}
 
-\pagenumbering{gobble}
+
 
 % Konvertierung zu HTML (zB zur Rechtschreibeprüfung mit Word oÄ):
 % pandoc -s -o myDocument.html myDocument.tex
@@ -50,14 +82,14 @@
 
 \begin{document}
 
-{\Large Merkblatt Audio Pegel}
+{\Large \docTitle}
 
 \section*{Formeln}
-In der Regel wird mit Spannungen gerechnet. Somit werden folgende Formeln für die Umrechnungen zwischen
-Verstärkungsmass $g = L_{Uout} - L_{Uin}$ und Verstärkungsfaktor $V=\frac{U_{out}}{U_{in}}$ verwendet:
+In der Regel wird mit Spannungen gerechnet. Somit werden folgende Formeln f\"ur die Umrechnungen zwischen
+Verst\"arkungsmass $g = L_{Uout} - L_{Uin}$ und Verst\"arkungsfaktor $V=\frac{U_{out}}{U_{in}}$ verwendet:
 $$ g = 20 * \log_{10}(V) \Leftrightarrow V = 10^{g/20} $$
 
-Ein Pegel $L_U$ ergibt sich aus der Ziel- oder Messgrösse $U$ und dem Referenzwert $U_0$:
+Ein Pegel $L_U$ ergibt sich aus der Ziel- oder Messgr\"osse $U$ und dem Referenzwert $U_0$:
 $$ L_U = 20 * \log_{10}(\frac{U}{U_0})  \Leftrightarrow U = U_0 * 10^{L_U/20} $$
 
 
@@ -81,7 +113,7 @@ $$ L_U = 20 * \log_{10}(\frac{U}{U_0})  \Leftrightarrow U = U_0 * 10^{L_U/20} $$
 \section*{Line Pegel}
 \begin{tabular}{|c|c|}
     \hline
-    \textbf{Tontechnik} & \textbf{Heimgeräte/Consumer} \\
+    \textbf{Tontechnik} & \textbf{Heimger\"ate/Consumer} \\
     \hline
     \textbf{+4dBu}              & \textbf{-10dBV} \\
     1.782dBV                    & -7.782dBu \\
@@ -92,9 +124,9 @@ $$ L_U = 20 * \log_{10}(\frac{U}{U_0})  \Leftrightarrow U = U_0 * 10^{L_U/20} $$
 \end{tabular}
 \\
 
-In der Tontechnik trifft man auch Angaben für den Bezugspegel von 0dBV, das sind 1.78dB weniger als +4dBu.
-Dieser Unterschied spielt meistens keine Rolle, da viele Geräte einen Gain Regler haben, mit dem dieser kaum
-hörbare Unterschied ausgeglichen werden könnte.
+In der Tontechnik trifft man auch Angaben f\"ur den Bezugspegel von 0dBV, das sind 1.78dB weniger als +4dBu.
+Dieser Unterschied spielt meistens keine Rolle, da viele Ger\"ate einen Gain Regler haben, mit dem dieser kaum
+h\"orbare Unterschied ausgeglichen werden k\"onnte.
 
 Der Pegel -10dBV wird z.T. auch als ``Aux Pegel'' (anstatt Line Pegel) bezeichnet.
 
@@ -102,14 +134,14 @@ Der Pegel -10dBV wird z.T. auch als ``Aux Pegel'' (anstatt Line Pegel) bezeichne
 
 
 
-\section*{Kopfhörer Ausgang}
+\section*{Kopfh\"orer Ausgang}
 
-Für Kopfhörer Ausgänge lassen sich schlecht generelle Aussagen treffen. Ein Kopfhörerverstärker ist immer für
+F\"ur Kopfh\"orer Ausg\"ange lassen sich schlecht generelle Aussagen treffen. Ein Kopfh\"orerverst\"arker ist immer f\"ur
 eine gewisse Impedanz (-Bereich) ausgelegt.
 \\
 
-Bei Mobilgeräten scheint der maximal Pegel von 150mV\textsubscript{P} gängig zu sein. Smartphones erreichen
-diesen Wert ggf. bereits bei ca. \nicefrac{2}{3} der Lautstärkeneinstellung, wobei der letzte Drittel oft eine
+Bei Mobilger\"aten scheint der maximal Pegel von 150mV\textsubscript{P} g\"angig zu sein. Smartphones erreichen
+diesen Wert ggf. bereits bei ca. \nicefrac{2}{3} der Lautst\"arkeneinstellung, wobei der letzte Drittel oft eine
 Warnung des Benutzers verursacht.
 
 
